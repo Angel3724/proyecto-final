@@ -20,7 +20,7 @@ class LibroController extends Controller
      */
     public function create()
     {
-        //
+        return view('libros.create-libro');
     }
 
     /**
@@ -28,7 +28,21 @@ class LibroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titulo' => ['required', 'string', 'min:3', 'max:255'],
+            'autor' => ['required', 'string', 'min:3', 'max:255'],
+            'editorial' => ['nullable', 'string', 'min:3', 'max:255'],
+            'precio' => ['required', 'numeric', 'min:0'],
+            'anio_publicacion' => ['required', 'integer', 'min:0', 'max:' . date('Y')],
+            'isbn' => ['required', 'string', 'max:13', 'regex:/^\d{10}(\d{3})?$/'],
+            'paginas' => ['required', 'integer', 'min:1'],
+            'genero' => ['required', 'string', 'in:Ficción,No Ficción,Ciencia,Fantasía,Historia,Otro'],
+            'sinopsis' => ['nullable', 'string', 'max:1000'],
+        ]);
+        
+        $libro = Libro::create($request->all());
+
+        return redirect()->route('libro.index');
     }
 
     /**

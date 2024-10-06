@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->string('autor');
             $table->string('editorial')->nullable();
+            $table->decimal('precio', 8, 2);
             $table->year('anio_publicacion');
             $table->string('isbn')->unique();
             $table->integer('paginas');
