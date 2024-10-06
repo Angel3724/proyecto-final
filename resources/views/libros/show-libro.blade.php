@@ -6,7 +6,7 @@
     <title>Libro</title>
 </head>
 <body>
-<h1>{{ $libro->titulo }}</h1>
+    <h1>{{ $libro->titulo }}</h1>
     <p>
         <strong>Autor:</strong> {{ $libro->autor }}<br>
         <strong>Sinopsis:</strong> {{ $libro->sinopsis }}
@@ -22,10 +22,10 @@
         </ul>
     </p>
     <a href="{{ route('libro.edit', $libro) }}">Editar</a><br>
-    <form action="{{ route('libro.destroy', $libro) }}" method="POST">
+    <form action="{{ route('libro.destroy', $libro) }}" method="POST" style="display:inline;">
         @csrf
         @method('DELETE')
-        <input type="submit" value="Borrar">
+        <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?');">Eliminar</button>
     </form>
 </body>
 </html>

@@ -6,7 +6,7 @@
     <title>Libros</title>
 </head>
 <body>
-<h1>Libros</h1>
+    <h1>Libros</h1>
     <p>
         <a href="{{ route('libro.create') }}">Agregar Libro</a>
     </p>

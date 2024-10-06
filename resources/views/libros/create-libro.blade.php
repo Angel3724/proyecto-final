@@ -6,19 +6,9 @@
     <title>Agregar Libro</title>
 </head>
 <body>
-<h1>Crear Libro</h1>
+    <h1>Crear Libro</h1>
     <form action="{{ route('libro.store') }}" method="POST">
         @csrf
-
-        @if ($errors->any())
-            <div style="color: red;">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         
         <label for="titulo">Título:</label><br>
         <input type="text" name="titulo" id="titulo" value="{{ old('titulo') }}">
@@ -43,7 +33,7 @@
         <br>
 
         <label for="precio">Precio:</label><br>
-        <input type="text" name="precio" value="{{ old('precio') }}">
+        <input type="text" name="precio" id="precio" value="{{ old('precio') }}">
         @error('precio')
             <div>{{ $message }}</div>
         @enderror

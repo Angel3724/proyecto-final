@@ -35,7 +35,7 @@ class LibroController extends Controller
             'editorial' => ['nullable', 'string', 'min:3', 'max:255'],
             'precio' => ['required', 'numeric', 'min:0'],
             'anio_publicacion' => ['required', 'integer', 'min:0', 'max:' . date('Y')],
-            'isbn' => ['required', 'string', 'max:13', 'regex:/^\d{10}(\d{3})?$/'],
+            'isbn' => ['required', 'string', 'max:13', 'regex:/^\d{10}(\d{3})?$/', 'unique:libros'],
             'paginas' => ['required', 'integer', 'min:1'],
             'genero' => ['required', 'string', 'in:Ficción,No Ficción,Ciencia,Fantasía,Historia,Otro'],
             'sinopsis' => ['nullable', 'string', 'max:1000'],
@@ -59,7 +59,7 @@ class LibroController extends Controller
      */
     public function edit(Libro $libro)
     {
-        //
+        return view('libros.edit-libro', compact('libro'));
     }
 
     /**
@@ -67,7 +67,21 @@ class LibroController extends Controller
      */
     public function update(Request $request, Libro $libro)
     {
-        //
+        $request->validate([
+            'titulo' => ['required', 'string', 'min:3', 'max:255'],
+            'autor' => ['required', 'string', 'min:3', 'max:255'],
+            'editorial' => ['nullable', 'string', 'min:3', 'max:255'],
+            'precio' => ['required', 'numeric', 'min:0'],
+            'anio_publicacion' => ['required', 'integer', 'min:0', 'max:' . date('Y')],
+            'isbn' => ['required', 'string', 'max:13', 'regex:/^\d{10}(\d{3})?$/', 'unique:libros,isbn,' . $libro->id],
+            'paginas' => ['required', 'integer', 'min:1'],
+            'genero' => ['required', 'string', 'in:Ficción,No Ficción,Ciencia,Fantasía,Historia,Otro'],
+            'sinopsis' => ['nullable', 'string', 'max:1000'],
+        ]);
+
+        $libro->update($request->all());
+
+        return redirect()->route('libro.show', $libro);
     }
 
     /**
@@ -75,6 +89,8 @@ class LibroController extends Controller
      */
     public function destroy(Libro $libro)
     {
-        //
+        $libro->delete();
+
+        return redirect()->route('libro.index');
     }
 }
