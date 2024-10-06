@@ -8,6 +8,7 @@ Route::get('/', function () {
 });
 
 Route::resource('libro', LibroController::class);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
