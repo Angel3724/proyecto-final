@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LibroController;
 
+Route::get('inicio', function() {
+    return view('inicio');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
