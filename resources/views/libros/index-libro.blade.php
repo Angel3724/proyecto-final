@@ -1,55 +1,66 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libros</title>
-</head>
-<body>
-    <h1>Libros</h1>
-    <p>
-        <a href="{{ route('libro.create') }}">Agregar Libro</a>
-    </p>
-    <table border="1">
-        <thead>
-            <tr>
+@extends('layouts.sneat')
+@section('contenido')
+    <h1 class="fw-bold p-4">Listado de Libros</h1>
+
+    <a class="btn btn-primary btn-lg" type="button"
+        href="{{ route('libro.create') }}">
+        Agregar Libro
+    </a><br>
+
+
+    <!-- Basic Bootstrap Table -->
+    <div class="card">
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+            <thead>
+                <tr>
                 <th>ID</th>
                 <th>Título</th>
                 <th>Autor</th>
-                <th>Año de Publicación</th>
-                <th>Género</th>
-                <th>Precio</th>
                 <th>Creación</th>
                 <th>Edición</th>
                 <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($libros as $libro)
-            <tr>
-                <td>{{ $libro->id }}</td>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach($libros as $libro)
+                <tr>
+                <td><i class="fab fa-angular fa-lg text-danger me-3" href="{{ route('libro.show', $libro) }}"></i> <strong>{{ $libro->id }}</strong></td>
                 <td>
                     <a href="{{ route('libro.show', $libro) }}">
-                        {{ $libro->titulo }}
+                            {{ $libro->titulo }}
                     </a>
                 </td>
                 <td>{{ $libro->autor }}</td>
-                <td>{{ $libro->anio_publicacion }}</td>
-                <td>{{ $libro->genero }}</td>
-                <td>{{ number_format($libro->precio, 2) }} MXN$</td>
-                <td>{{ $libro->created_at }}</td>
-                <td>{{ $libro->updated_at }}</td>
+                <td><span class="badge bg-label-primary me-1">{{ $libro->created_at }}</span></td>
+                <td><span class="badge bg-label-primary me-1">{{ $libro->updated_at }}</span></td>
                 <td>
-                    <a href="{{ route('libro.edit', $libro) }}">Editar</a>
-                    <form action="{{ route('libro.destroy', $libro) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?');">Eliminar</button>
-                    </form>
+                    <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('libro.edit', $libro) }}">
+                            <i class="bx bx-edit-alt me-2"></i> Editar
+                        </a>
+
+                        <form action="{{ route('libro.destroy', $libro) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <a class="dropdown-item" href="javascript:void(0);" 
+                            onclick="if (confirm('¿Estás seguro de que deseas eliminar este libro?')) { event.preventDefault(); this.closest('form').submit(); }">
+                                <i class="bx bx-trash me-2"></i> Eliminar
+                            </a>
+                        </form>
+
+                    </div>
+                    </div>
                 </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</body>
-</html>
+                </tr>
+                @endforeach
+            </tbody>
+            </table>
+        </div>
+    </div>
+    <!--/ Basic Bootstrap Table -->
+@endsection

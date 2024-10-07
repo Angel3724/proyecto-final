@@ -1,87 +1,120 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Libro</title>
-</head>
-<body>
-    <h1>Crear Libro</h1>
-    <form action="{{ route('libro.store') }}" method="POST">
-        @csrf
-        
-        <label for="titulo">Título:</label><br>
-        <input type="text" name="titulo" id="titulo" value="{{ old('titulo') }}">
-        @error('titulo')
-            <div>{{ $message }}</div>
-        @enderror
-        <br>
-        
-        <label for="autor">Autor:</label><br>
-        <input type="text" name="autor" id="autor" value="{{ old('autor') }}">
-        @error('autor')
-            <div>{{ $message }}</div>
-        @enderror
-        <br>
+@extends('layouts.sneat')
+@section('contenido')
+<!-- Basic Layout -->
+    <div class="col-xxl">
+        <div class="card mb-4">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="mb-0">Agregar Libro</h5>
+            <small class="text-muted float-end"></small>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('libro.store') }}" method="POST">
+            @csrf
 
-        
-        <label for="editorial">Editorial:</label><br>
-        <input type="text" name="editorial" id="editorial" value="{{ old('editorial') }}">
-        @error('editorial')
-            <div>{{ $message }}</div>
-        @enderror
-        <br>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="titulo">Titulo</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" name="titulo" id="titulo" value="{{ old('titulo') }}">
+                @error('titulo')
+                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+                </div>
+            </div>
 
-        <label for="precio">Precio:</label><br>
-        <input type="text" name="precio" id="precio" value="{{ old('precio') }}">
-        @error('precio')
-            <div>{{ $message }}</div>
-        @enderror
-        <br>
-        
-        <label for="anio_publicacion">Año de Publicación:</label><br>
-        <input type="number" name="anio_publicacion" id="anio_publicacion" value="{{ old('anio_publicacion') }}">
-        @error('anio_publicacion')
-            <div>{{ $message }}</div>
-        @enderror
-        <br>
-        
-        <label for="isbn">ISBN:</label><br>
-        <input type="text" name="isbn" id="isbn" value="{{ old('isbn') }}">
-        @error('isbn')
-            <div>{{ $message }}</div>
-        @enderror
-        <br>
-        
-        <label for="paginas">Número de Páginas:</label><br>
-        <input type="number" name="paginas" id="paginas" value="{{ old('paginas') }}">
-        @error('paginas')
-            <div>{{ $message }}</div>
-        @enderror
-        <br>
-        
-        <label for="genero">Género:</label>
-        <select name="genero" id="genero">
-            <option value="Ficción">Ficción</option>
-            <option value="No Ficción">No Ficción</option>
-            <option value="Ciencia">Ciencia</option>
-            <option value="Fantasía">Fantasía</option>
-            <option value="Historia">Historia</option>
-            <option value="Otro">Otro</option>
-        </select>
-        @error('genero')
-            <div>{{ $message }}</div>
-        @enderror
-        <br>
-        
-        <label for="sinopsis">Sinopsis:</label><br>
-        <textarea name="sinopsis" id="sinopsis" cols="30" rows="4">{{ old('sinopsis') }}</textarea>
-        @error('sinopsis')
-            <div>{{ $message }}</div>
-        @enderror
-        <br>
-        
-        <input type="submit" value="Enviar">
-    </form>
-</body>
-</html>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="autor">Autor</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" name="autor" id="autor" value="{{ old('autor') }}">
+                @error('autor')
+                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="editorial">Editorial</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" name="editorial" id="editorial" value="{{ old('editorial') }}">
+                @error('editorial')
+                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="editorial">Precio</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" name="precio" id="precio" value="{{ old('precio') }}">
+                @error('precio')
+                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="anio_publicacion">Año de Publicación</label>
+                <div class="col-sm-10">
+                <input type="number" class="form-control" name="anio_publicacion" id="anio_publicacion" value="{{ old('anio_publicacion') }}">
+                @error('anio_publicacion')
+                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="isbn">ISBN</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" name="isbn" id="isbn" value="{{ old('isbn') }}">
+                @error('isbn')
+                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="paginas">Número de Páginas</label>
+                <div class="col-sm-10">
+                <input type="number" class="form-control" name="paginas" id="paginas" value="{{ old('paginas') }}">
+                @error('paginas')
+                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="genero">Género</label>
+                <div class="col-sm-10">
+                    <select name="genero" id="genero" class="form-control">
+                        <option value="Ficción" {{ old('genero') == 'Ficción' ? 'selected' : '' }}>Ficción</option>
+                        <option value="No Ficción" {{ old('genero') == 'No Ficción' ? 'selected' : '' }}>No Ficción</option>
+                        <option value="Ciencia" {{ old('genero') == 'Ciencia' ? 'selected' : '' }}>Ciencia</option>
+                        <option value="Fantasía" {{ old('genero') == 'Fantasía' ? 'selected' : '' }}>Fantasía</option>
+                        <option value="Historia" {{ old('genero') == 'Historia' ? 'selected' : '' }}>Historia</option>
+                        <option value="Otro" {{ old('genero') == 'Otro' ? 'selected' : '' }}>Otro</option>
+                    </select>
+                    @error('genero')
+                        <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="sinopsis">Sinopsis</label>
+                <div class="col-sm-10">
+                <textarea name="sinopsis" class="form-control" id="sinopsis" cols="30" rows="4">{{ old('sinopsis') }}</textarea>
+                @error('sinopsis')
+                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                @enderror
+                </div>
+            </div>
+
+            <div class="row justify-content-end">
+                <div class="col-sm-10">
+                    <input type="submit" value="Agregar" class="btn btn-primary">
+                </div>
+            </div>
+            </form>
+        </div>
+        </div>
+    </div>
+@endsection
