@@ -23,7 +23,7 @@ class LibroController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        $libros = Libro::all();
+        $libros = Libro::with('user:id,email')->get();
         return view('libros.index-libro', compact('libros'));
     }
 
@@ -70,6 +70,7 @@ class LibroController extends Controller implements HasMiddleware
      */
     public function show(Libro $libro)
     {
+        $libro->load('user', 'generos');
         return view('libros.show-libro', compact('libro'));
     }
 
@@ -80,6 +81,7 @@ class LibroController extends Controller implements HasMiddleware
     {
         Gate::authorize('update', $libro);
 
+        $libro->load('generos');
         $generos = Genero::all();
         return view('libros.edit-libro', compact('libro', 'generos'));
     }
