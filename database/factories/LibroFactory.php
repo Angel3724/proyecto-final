@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Genero;
+use App\Models\Libro;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,5 +30,14 @@ class LibroFactory extends Factory
             'sinopsis' => $this->faker->paragraph(),
             'user_id' => User::inRandomOrder()->first()->id,
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Libro $libro) {
+            $cantidadGeneros = $this->faker->numberBetween(1, 4);
+            $generos = Genero::all()->random($cantidadGeneros);
+            $libro->generos()->attach($generos); 
+        });
     }
 }
