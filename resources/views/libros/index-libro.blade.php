@@ -1,4 +1,5 @@
 @extends('layouts.sneat')
+@extends('layouts.navbar')
 @section('contenido')
     <h1 class="fw-bold p-4">Listado de Libros</h1>
 

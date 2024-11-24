@@ -1,4 +1,5 @@
 @extends('layouts.sneat')
+@extends('layouts.navbar')
 @section('contenido')
 <!-- Basic Layout -->
     <div class="col-xxl">
@@ -14,7 +15,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="titulo">Titulo</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" name="titulo" id="titulo" value="{{ old('titulo') }}" placeholder="Ingrese el título del libro.">
+                <input type="text" class="form-control" name="titulo" id="titulo" value="{{ old('titulo') }}" required placeholder="Ingrese el título del libro.">
                 @error('titulo')
                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                 @enderror
@@ -24,7 +25,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="autor">Autor</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" name="autor" id="autor" value="{{ old('autor') }}" placeholder="Ingrese el nombre del autor.">
+                <input type="text" class="form-control" name="autor" id="autor" value="{{ old('autor') }}" required placeholder="Ingrese el nombre del autor.">
                 @error('autor')
                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                 @enderror
@@ -44,7 +45,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="editorial">Precio</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" name="precio" id="precio" value="{{ old('precio') }}" placeholder="Ingrese el precio (ej. 199.99).">
+                <input type="text" class="form-control" name="precio" id="precio" value="{{ old('precio') }}" required placeholder="Ingrese el precio (ej. 199.99).">
                 @error('precio')
                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                 @enderror
@@ -54,7 +55,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="anio_publicacion">Año de Publicación</label>
                 <div class="col-sm-10">
-                <input type="number" class="form-control" name="anio_publicacion" id="anio_publicacion" value="{{ old('anio_publicacion') }}" placeholder="Ingrese el año de publicación (ej. 2023).">
+                <input type="number" class="form-control" name="anio_publicacion" id="anio_publicacion" value="{{ old('anio_publicacion') }}" required placeholder="Ingrese el año de publicación (ej. 2023).">
                 @error('anio_publicacion')
                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                 @enderror
@@ -64,7 +65,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="isbn">ISBN</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" name="isbn" id="isbn" value="{{ old('isbn') }}" placeholder="Ingrese el ISBN único del libro.">
+                <input type="text" class="form-control" name="isbn" id="isbn" value="{{ old('isbn') }}" required placeholder="Ingrese el ISBN único del libro.">
                 @error('isbn')
                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                 @enderror
@@ -74,7 +75,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="paginas">Número de Páginas</label>
                 <div class="col-sm-10">
-                <input type="number" class="form-control" name="paginas" id="paginas" value="{{ old('paginas') }}" placeholder="Ingrese el número de páginas.">
+                <input type="number" class="form-control" name="paginas" id="paginas" value="{{ old('paginas') }}" required placeholder="Ingrese el número de páginas.">
                 @error('paginas')
                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                 @enderror

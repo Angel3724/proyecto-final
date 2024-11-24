@@ -10,7 +10,6 @@ Route::get('/', function () {
 });
 
 Route::resource('libro', LibroController::class);
-Route::resource('genero', GeneroController::class);
 
 Route::middleware([
     'auth:sanctum',

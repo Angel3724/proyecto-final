@@ -1,4 +1,5 @@
 @extends('layouts.sneat')
+@extends('layouts.navbar')
 @section('contenido')
 <body>
     <div class="container mt-5">

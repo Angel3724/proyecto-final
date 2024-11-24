@@ -1,4 +1,5 @@
 @extends('layouts.sneat')
+@extends('layouts.navbar')
 @section('contenido')
 <!-- Basic Layout -->
     <div class="col-xxl">
@@ -15,7 +16,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="titulo">Titulo</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" name="titulo" id="titulo" value="{{ old('titulo') ?? $libro->titulo }}">
+                <input type="text" class="form-control" name="titulo" id="titulo" required value="{{ old('titulo') ?? $libro->titulo }}">
                 @error('titulo')
                     <div class="form-text">{{ $message }}</div>
                 @enderror
@@ -25,7 +26,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="autor">Autor</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" name="autor" id="autor" value="{{ old('autor') ?? $libro->autor }}">
+                <input type="text" class="form-control" name="autor" id="autor" required value="{{ old('autor') ?? $libro->autor }}">
                 @error('autor')
                     <div class="form-text">{{ $message }}</div>
                 @enderror
@@ -35,7 +36,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="editorial">Editorial</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" name="editorial" id="editorial" value="{{ old('editorial') ?? $libro->editorial }}">
+                <input type="text" class="form-control" name="editorial" id="editorial" required value="{{ old('editorial') ?? $libro->editorial }}">
                 @error('editorial')
                     <div class="form-text">{{ $message }}</div>
                 @enderror
@@ -45,7 +46,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="editorial">Precio</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" name="precio" id="precio" value="{{ old('precio') ?? $libro->precio }}">
+                <input type="text" class="form-control" name="precio" id="precio" required value="{{ old('precio') ?? $libro->precio }}">
                 @error('precio')
                     <div class="form-text">{{ $message }}</div>
                 @enderror
@@ -55,7 +56,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="anio_publicacion">Año de Publicación</label>
                 <div class="col-sm-10">
-                <input type="number" class="form-control" name="anio_publicacion" id="anio_publicacion" value="{{ old('anio_publicacion') ?? $libro->anio_publicacion }}">
+                <input type="number" class="form-control" name="anio_publicacion" id="anio_publicacion" required value="{{ old('anio_publicacion') ?? $libro->anio_publicacion }}">
                 @error('anio_publicacion')
                     <div class="form-text">{{ $message }}</div>
                 @enderror
@@ -65,7 +66,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="isbn">ISBN</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" name="isbn" id="isbn" value="{{ old('isbn') ?? $libro->isbn }}">
+                <input type="text" class="form-control" name="isbn" id="isbn" required value="{{ old('isbn') ?? $libro->isbn }}">
                 @error('isbn')
                     <div class="form-text">{{ $message }}</div>
                 @enderror
@@ -75,7 +76,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="paginas">Número de Páginas</label>
                 <div class="col-sm-10">
-                <input type="number" class="form-control" name="paginas" id="paginas" value="{{ old('paginas') ?? $libro->paginas }}">
+                <input type="number" class="form-control" name="paginas" id="paginas" required value="{{ old('paginas') ?? $libro->paginas }}">
                 @error('paginas')
                     <div class="form-text">{{ $message }}</div>
                 @enderror
