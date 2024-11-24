@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genero;
 use App\Models\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -30,7 +31,8 @@ class LibroController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        return view('libros.create-libro');
+        $generos = Genero::all();
+        return view('libros.create-libro', compact('generos'));
     }
 
     /**
@@ -46,15 +48,18 @@ class LibroController extends Controller implements HasMiddleware
             'anio_publicacion' => ['required', 'integer', 'min:0', 'max:' . date('Y')],
             'isbn' => ['required', 'string', 'max:13', 'regex:/^\d{10}(\d{3})?$/', 'unique:libros'],
             'paginas' => ['required', 'integer', 'min:1'],
-            'genero' => ['required', 'string', 'in:Ficción,No Ficción,Ciencia,Fantasía,Historia,Otro'],
+            'generos' => ['required', 'array'],
+            'generos.*' => ['exists:generos,id'],
             'sinopsis' => ['nullable', 'string', 'max:1000'],
-        ]);
+        ]);        
 
         $request->merge([
             'user_id' => Auth::id(),
         ]);
             
         $libro = Libro::create($request->all());
+
+        $libro->generos()->attach($request->generos);
 
         return redirect()->route('libro.index');
     }
@@ -72,7 +77,8 @@ class LibroController extends Controller implements HasMiddleware
      */
     public function edit(Libro $libro)
     {
-        return view('libros.edit-libro', compact('libro'));
+        $generos = Genero::all();
+        return view('libros.edit-libro', compact('libro', 'generos'));
     }
 
     /**
@@ -88,11 +94,14 @@ class LibroController extends Controller implements HasMiddleware
             'anio_publicacion' => ['required', 'integer', 'min:0', 'max:' . date('Y')],
             'isbn' => ['required', 'string', 'max:13', 'regex:/^\d{10}(\d{3})?$/', 'unique:libros,isbn,' . $libro->id],
             'paginas' => ['required', 'integer', 'min:1'],
-            'genero' => ['required', 'string', 'in:Ficción,No Ficción,Ciencia,Fantasía,Historia,Otro'],
+            'generos' => ['required', 'array'],
+            'generos.*' => ['exists:generos,id'],
             'sinopsis' => ['nullable', 'string', 'max:1000'],
         ]);
 
         $libro->update($request->all());
+
+        $libro->generos()->sync($request->generos);
 
         return redirect()->route('libro.show', $libro);
     }

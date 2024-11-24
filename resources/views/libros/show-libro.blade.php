@@ -18,7 +18,15 @@
                 <ul class="list-group list-group-flush mb-3">
                     <li class="list-group-item"><strong>Editorial:</strong> {{ $libro->editorial }}</li>
                     <li class="list-group-item"><strong>Año de Publicación:</strong> {{ $libro->anio_publicacion }}</li>
-                    <li class="list-group-item"><strong>Género:</strong> {{ $libro->genero }}</li>
+                    
+                    <li class="list-group-item"><strong>Géneros:</strong>
+                        <ul>
+                            @foreach ($libro->generos as $genero)
+                                <li>{{ $genero->nombre }}</li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    
                     <li class="list-group-item"><strong>Precio:</strong> {{ number_format($libro->precio, 2) }} MXN$</li>
                     <li class="list-group-item"><strong>Páginas:</strong> {{ $libro->paginas }}</li>
                     <li class="list-group-item"><strong>ISBN:</strong> {{ $libro->isbn }}</li>

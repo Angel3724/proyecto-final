@@ -82,17 +82,27 @@
             </div>
 
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="genero">Género</label>
+                <label class="col-sm-2 col-form-label" for="generos">Género</label>
                 <div class="col-sm-10">
-                    <select name="genero" id="genero" class="form-control">
-                        <option value="Ficción" {{ old('genero') == 'Ficción' ? 'selected' : '' }}>Ficción</option>
-                        <option value="No Ficción" {{ old('genero') == 'No Ficción' ? 'selected' : '' }}>No Ficción</option>
-                        <option value="Ciencia" {{ old('genero') == 'Ciencia' ? 'selected' : '' }}>Ciencia</option>
-                        <option value="Fantasía" {{ old('genero') == 'Fantasía' ? 'selected' : '' }}>Fantasía</option>
-                        <option value="Historia" {{ old('genero') == 'Historia' ? 'selected' : '' }}>Historia</option>
-                        <option value="Otro" {{ old('genero') == 'Otro' ? 'selected' : '' }}>Otro</option>
-                    </select>
-                    @error('genero')
+                    <div class="row">
+                        @foreach ($generos as $genero)
+                            <div class="col-md-4 col-lg-3 mb-2">
+                                <div class="form-check">
+                                    <input 
+                                        type="checkbox" 
+                                        name="generos[]" 
+                                        value="{{ $genero->id }}" 
+                                        id="genero_{{ $genero->id }}" 
+                                        class="form-check-input"
+                                        {{ in_array($genero->id, old('generos', [])) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="genero_{{ $genero->id }}">
+                                        {{ $genero->nombre }}
+                                    </label>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    @error('generos')
                         <div class="alert alert-danger" role="alert">{{ $message }}</div>
                     @enderror
                 </div>
