@@ -17,8 +17,8 @@
                 <th>ID</th>
                 <th>Título</th>
                 <th>Autor</th>
-                <th>Creación</th>
-                <th>Edición</th>
+                <th>Precio</th>
+                <th>Usuario</th>
                 <th>Acciones</th>
                 </tr>
             </thead>
@@ -32,8 +32,8 @@
                     </a>
                 </td>
                 <td>{{ $libro->autor }}</td>
-                <td><span class="badge bg-label-primary me-1">{{ $libro->created_at }}</span></td>
-                <td><span class="badge bg-label-primary me-1">{{ $libro->updated_at }}</span></td>
+                <td><span class="badge bg-label-primary me-1"> {{ number_format($libro->precio, 2) }} MXN$</span></td>
+                <td> {{ $libro->user->email }} </td>
                 <td>
                     <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

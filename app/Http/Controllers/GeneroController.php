@@ -12,7 +12,8 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        //
+        $generos = Genero::all();
+        return view('generos.index-genero', compact('generos'));
     }
 
     /**

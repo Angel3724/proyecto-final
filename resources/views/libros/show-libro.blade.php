@@ -10,6 +10,7 @@
             <div class="card-body">
                 
                 <p class="card-text">
+                    <strong>Usuario:</strong> {{ $libro->user->email }}<br>
                     <strong>Autor:</strong> {{ $libro->autor }}<br>
                     <strong>Sinopsis:</strong> {{ $libro->sinopsis }}
                 </p>

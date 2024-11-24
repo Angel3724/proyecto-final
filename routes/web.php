@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\GeneroController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LibroController;
+use App\Models\Genero;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::resource('libro', LibroController::class);
+Route::resource('genero', GeneroController::class);
 
 Route::middleware([
     'auth:sanctum',

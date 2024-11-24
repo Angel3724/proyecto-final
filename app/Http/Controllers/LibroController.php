@@ -6,6 +6,7 @@ use App\Models\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class LibroController extends Controller implements HasMiddleware
 {
@@ -48,7 +49,11 @@ class LibroController extends Controller implements HasMiddleware
             'genero' => ['required', 'string', 'in:Ficción,No Ficción,Ciencia,Fantasía,Historia,Otro'],
             'sinopsis' => ['nullable', 'string', 'max:1000'],
         ]);
-        
+
+        $request->merge([
+            'user_id' => Auth::id(),
+        ]);
+            
         $libro = Libro::create($request->all());
 
         return redirect()->route('libro.index');
