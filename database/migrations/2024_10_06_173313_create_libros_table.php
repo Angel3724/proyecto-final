@@ -20,7 +20,6 @@ return new class extends Migration
             $table->year('anio_publicacion');
             $table->string('isbn')->unique();
             $table->integer('paginas');
-            $table->string('genero');
             $table->text('sinopsis')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();

@@ -2,19 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Genero;
+use App\Models\Libro;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class GenerosSeeder extends Seeder
+class LibrosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Genero::factory(10)->create();
-        
+        Libro::factory(100)->create();
     }
 }

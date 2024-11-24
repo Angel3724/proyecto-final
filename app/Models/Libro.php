@@ -14,4 +14,9 @@ class Libro extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function generos()
+    {
+        return $this->belongsToMany(Genero::class);
+    }
 }

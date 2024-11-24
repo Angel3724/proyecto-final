@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('generos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre')->unique();
+        Schema::create('genero_libro', function (Blueprint $table) {
+            $table->foreignId('libro_id')->constrained()->onDelete('cascade');
+            $table->foreignId('genero_id')->constrained();
         });
     }
 
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('generos');
+        Schema::dropIfExists('genero_libro');
     }
 };
