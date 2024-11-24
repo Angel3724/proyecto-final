@@ -33,12 +33,16 @@
                     <li class="list-group-item"><strong>ISBN:</strong> {{ $libro->isbn }}</li>
                 </ul>
                 
+                @can('update', $libro)
                 <a href="{{ route('libro.edit', $libro) }}" class="btn btn-warning me-2">Editar</a>
+                @endcan
+                @can('delete', $libro)
                 <form action="{{ route('libro.destroy', $libro) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?');">Eliminar</button>
                 </form>
+                @endcan
             </div>
         </div>
     </div>

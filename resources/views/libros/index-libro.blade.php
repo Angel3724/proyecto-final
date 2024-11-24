@@ -20,7 +20,9 @@
                 <th>Autor</th>
                 <th>Precio</th>
                 <th>Usuario</th>
+                @auth
                 <th>Acciones</th>
+                @endauth
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -35,7 +37,9 @@
                 <td>{{ $libro->autor }}</td>
                 <td><span class="badge bg-label-primary me-1"> {{ number_format($libro->precio, 2) }} MXN$</span></td>
                 <td> {{ $libro->user->email }} </td>
+                
                 <td>
+                @can('update', $libro)
                     <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                         <i class="bx bx-dots-vertical-rounded"></i>
@@ -56,6 +60,7 @@
 
                     </div>
                     </div>
+                    @endcan
                 </td>
                 </tr>
                 @endforeach

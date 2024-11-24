@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class LibroController extends Controller implements HasMiddleware
 {
@@ -77,6 +78,8 @@ class LibroController extends Controller implements HasMiddleware
      */
     public function edit(Libro $libro)
     {
+        Gate::authorize('update', $libro);
+
         $generos = Genero::all();
         return view('libros.edit-libro', compact('libro', 'generos'));
     }
@@ -86,6 +89,8 @@ class LibroController extends Controller implements HasMiddleware
      */
     public function update(Request $request, Libro $libro)
     {
+        Gate::authorize('update', $libro);
+
         $request->validate([
             'titulo' => ['required', 'string', 'min:3', 'max:255'],
             'autor' => ['required', 'string', 'min:3', 'max:255'],
@@ -111,6 +116,8 @@ class LibroController extends Controller implements HasMiddleware
      */
     public function destroy(Libro $libro)
     {
+        Gate::authorize('delete', $libro);
+
         $libro->delete();
 
         return redirect()->route('libro.index');
