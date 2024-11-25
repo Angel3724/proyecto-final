@@ -24,7 +24,6 @@ Route::get('/email/verify', function () {
 Route::get('/', [LibroController::class, 'index'])->name('libro');
 
 Route::resource('libro', LibroController::class);
-
 Route::get('libros/eliminados', [LibroController::class, 'trashed'])->name('libro.trashed');
 Route::get('libros/mis-libros', [LibroController::class, 'mine'])->name('libro.mine');
 Route::patch('libros/{id}/restaurar', [LibroController::class, 'restore'])->name('libro.restore');
