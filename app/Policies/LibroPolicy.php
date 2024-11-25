@@ -54,7 +54,7 @@ class LibroPolicy
      */
     public function restore(User $user, Libro $libro): bool
     {
-        //
+        return $user->id === $libro->user_id;
     }
 
     /**
@@ -62,6 +62,6 @@ class LibroPolicy
      */
     public function forceDelete(User $user, Libro $libro): bool
     {
-        //
+        return $user->id === $libro->user_id;
     }
 }

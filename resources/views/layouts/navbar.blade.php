@@ -16,6 +16,8 @@
         <a class="nav-item nav-link active" href="{{ route('libro.index') }}">Libros</a>
         @auth
         <a class="nav-item nav-link" href="{{ route('libro.create') }}">Agregar libro</a>
+        <a class="nav-item nav-link" href="{{ route('libro.mine') }}">Mis libros</a>
+        <a class="nav-item nav-link" href="{{ route('libro.trashed') }}">Libros eliminados</a>
         @endauth
         </div>
     </div>

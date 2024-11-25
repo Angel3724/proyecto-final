@@ -122,6 +122,41 @@ class LibroController extends Controller implements HasMiddleware
 
         $libro->delete();
 
-        return redirect()->route('libro.index');
+        return redirect()->route('libro.mine');
+    }
+
+    public function trashed()
+    {
+        $libros = Libro::onlyTrashed()->with('user:id,email')->get();
+        return view('libros.trashed-libro', compact('libros'));
+    }
+
+    public function restore($id)
+    {
+        $libro = Libro::onlyTrashed()->findOrFail($id);
+
+        Gate::authorize('restore', $libro);
+
+        $libro->restore();
+
+        return redirect()->route('libro.trashed')->with('success', 'Libro restaurado correctamente.');
+    }
+
+    public function forceDelete($id)
+    {        
+        $libro = Libro::withTrashed()->findOrFail($id);
+
+        Gate::authorize('forceDelete', $libro);
+
+        $libro->forceDelete(); 
+
+        return redirect()->route('libro.trashed')->with('success', 'Libro eliminado definitivamente');
+    }
+
+    public function mine()
+    {
+        $libros = Auth::user()->libros()->with('user')->get();
+
+        return view('libros.index-libro', compact('libros'));
     }
 }
