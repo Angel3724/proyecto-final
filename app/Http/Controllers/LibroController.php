@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LibroCreadoMail;
 use App\Models\Genero;
 use App\Models\Libro;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 
 class LibroController extends Controller implements HasMiddleware
 {
@@ -61,6 +63,9 @@ class LibroController extends Controller implements HasMiddleware
         $libro = Libro::create($request->all());
 
         $libro->generos()->attach($request->generos);
+
+        $user = Auth::user();
+        Mail::to($user->email)->send(new LibroCreadoMail($libro));
 
         return redirect()->route('libro.index');
     }
