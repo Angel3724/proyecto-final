@@ -6,6 +6,7 @@ use App\Models\Libro;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
@@ -29,17 +30,18 @@ class LibroCreadoMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Nuevo libro creado', // Definimos el asunto
+            subject: 'Libro Creado Mail',
         );
     }
 
     /**
-     * Build the message.
+     * Get the message content definition.
      */
-    public function build()
+    public function content(): Content
     {
-        return $this->subject('Nuevo libro creado')
-                    ->view('emails.libro-creado'); // Asegúrate de que este archivo exista
+        return new Content(
+            markdown: 'emails.libro-creado',
+        );
     }
 
     /**
